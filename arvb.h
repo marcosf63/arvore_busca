@@ -13,6 +13,7 @@ void arvb_imprime(ArvB *a);        //Função que imprime os elementos de uma Á
 ArvB* arvb_insere(ArvB *a, int c); //Função que insere um inteiro em uma Árvore.
 ArvB* arvb_remove(ArvB *a, int c); //Função que remove um inteiro em uma Árvore.
 void arvb_libera(ArvB *a);         //Libera o espaço alocado para uma Árvore.
+int arvb_altura(ArvB *a);
 int folhas_primos(ArvB* a);        //Função que retorne a quantidade de folhas de uma árvore binária de busca que possuem no campo info um número primo.
 int dois_filhos(ArvB* a);          //Função que retorne a quantidade de nós de uma árvore binária de busca que possuem os dois filhos (campos dir e esq diferentes de NULL).
 int nos_igual_altura(ArvB* a);     //Funçãoo que, dada uma árvore binária de busca, retorne a quantidade de nós cujas subávores esquerda e direita tenham igual altura.
@@ -126,4 +127,40 @@ int dois_filhos(ArvB* a) {
 
   return 0;
 }
+int arvb_hSAE(ArvB *a) {
+  if(arvb_vazia(a))
+    return -1;
+  else {
+    int hSAE = arvb_hSAE(a->esq);
+    return 1 + hSAE;
+  }
+}
 
+int arvb_hSAD(ArvB *a) {
+  if(arvb_vazia(a))
+    return -1;
+  else {
+    int hSAD = arvb_hSAD(a->dir);
+    return 1 + hSAD;
+  }
+}
+int arvb_altura(ArvB *a) {
+  if (arvb_vazia(a))
+    return -1;
+  else {
+    int hSAE = arvb_hSAE(a);
+    int hSAD = arvb_hSAD(a);
+    if (hSAE > hSAD)
+      return hSAE;
+    else
+      return hSAD;
+   }
+}
+
+void arvb_libera(ArvB *a) {
+  if (!arvb_vazia(a)) {
+    arvb_libera(a->esq);
+    arvb_libera(a->dir);
+    free(a);
+  }
+}

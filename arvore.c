@@ -4,43 +4,33 @@
 
 int main() {
 
-  ArvB * a = arvb_cria_vazia();
+  ArvB * arvA = arvb_cria_vazia();
 
-  a = arvb_insere(a, 4);
-  a = arvb_insere(a, 3);
-  a = arvb_insere(a, 6);
- 
-
-
-  arvb_imprime(a); 
-  printf("\n");
-
-  printf("Qtd de folhas primos da arvore: %d\n", folhas_primos(a));
-
-  a = arvb_insere(a, 2);
-  a = arvb_insere(a, 5);
-  a = arvb_insere(a, 9);
-  a = arvb_insere(a, 11);
-  a = arvb_insere(a, 8);
-  arvb_imprime(a);
-  printf("\n");
-
-  printf("Qtd de folhas primos da arvore: %d\n", folhas_primos(a));
-
+  arvA = arvb_insere(arvA, 3);
+  arvA = arvb_insere(arvA, 5);
+  arvA = arvb_insere(arvA, 2);
+  arvA = arvb_insere(arvA, 4);
+  arvA = arvb_insere(arvA, 7);
+  arvA = arvb_insere(arvA, 0);
+  arvA = arvb_remove(arvA, 4); 
   
-  ArvB * b = arvb_cria_vazia();
+  printf("Alturar da arvore %d\n", arvb_altura(arvA));
+  printf("Qtd de folhas primos %d\n", folhas_primos(arvA));
+  printf("Qtd de nos com dois filhos %d\n", dois_filhos(arvA));
 
-  b = arvb_insere(b, 12);
-  b = arvb_insere(b, 18);
-  b = arvb_insere(b, 9);
-  b = arvb_insere(b, 10);
-  b = arvb_insere(b, 8);
-  b = arvb_insere(b, 17);
-  b = arvb_insere(b, 20);
-  b = arvb_insere(b, 19);
-  b = arvb_insere(b, 24);
+  ArvB * arvB = arvb_cria_vazia();
+  
+  arvB = arvb_insere(arvB, 8);
+  arvB = arvb_insere(arvB, 9);
+  arvB = arvb_insere(arvB, 11);
 
-  printf("Qtd de nos com dois filhos : %d\n", dois_filhos(b));
+  arvb_imprime(arvA);
+  printf("\n");
+  arvb_imprime(arvB);
+  printf("\n");
+  
+  arvb_libera(arvA);
+  arvb_libera(arvB);
 
   return 0;
 }
